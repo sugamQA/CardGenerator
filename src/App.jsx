@@ -177,7 +177,7 @@ function App() {
                   <div className="relative mb-6">
                     <div className="absolute inset-0 w-28 h-28 rounded-2xl bg-gradient-to-br from-pink-500/30 to-rose-500/10 blur-2xl" />
                     <div className="relative w-28 h-28 rounded-2xl bg-white/10 backdrop-blur-xl flex items-center justify-center ring-2 ring-white/20 shadow-2xl shadow-pink-500/20">
-                      <img src={uploadedImg || logoImg} alt="Logo" className="w-20 h-20 object-contain drop-shadow-lg" style={{ WebkitPrintColorAdjust: 'exact', printColorAdjust: 'exact' }} />
+                      <img src={uploadedImg || logoImg} alt="Logo" className="w-24 h-24 object-contain drop-shadow-lg" style={{ WebkitPrintColorAdjust: 'exact', printColorAdjust: 'exact' }} />
                     </div>
                   </div>
 
