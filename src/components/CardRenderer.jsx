@@ -13,10 +13,34 @@ const PhoneIcon = () => (
   </svg>
 );
 
+/* ─── Spinning lines watermark ─── */
+function SpinningLinesWatermark() {
+  return (
+    <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" viewBox="0 0 310 310" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <style>{`
+          @keyframes spin { 100% { transform: rotate(360deg); } }
+          .spin1 { animation: spin 20s linear infinite; transform-origin: 155px 155px; }
+          .spin2 { animation: spin 25s linear infinite reverse; transform-origin: 155px 155px; }
+          .spin3 { animation: spin 30s linear infinite; transform-origin: 155px 155px; }
+          .spin4 { animation: spin 35s linear infinite reverse; transform-origin: 155px 155px; }
+          .spin5 { animation: spin 40s linear infinite; transform-origin: 155px 155px; }
+        `}</style>
+      </defs>
+      <g className="spin1"><circle cx="155" cy="155" r="140" fill="none" stroke="#1b4d7a" strokeWidth="0.3" /><circle cx="155" cy="155" r="120" fill="none" stroke="#1b4d7a" strokeWidth="0.25" /></g>
+      <g className="spin2"><circle cx="155" cy="155" r="130" fill="none" stroke="#c41e3a" strokeWidth="0.3" strokeDasharray="8 12" /><circle cx="155" cy="155" r="100" fill="none" stroke="#c41e3a" strokeWidth="0.2" strokeDasharray="4 8" /></g>
+      <g className="spin3"><path d="M155 5 Q220 80 155 155 Q90 230 155 305" fill="none" stroke="#1b4d7a" strokeWidth="0.4" opacity="0.5" /><path d="M155 5 Q90 80 155 155 Q220 230 155 305" fill="none" stroke="#1b4d7a" strokeWidth="0.4" opacity="0.5" /></g>
+      <g className="spin4"><path d="M5 155 Q80 90 155 155 Q230 220 305 155" fill="none" stroke="#c41e3a" strokeWidth="0.3" opacity="0.4" /><path d="M5 155 Q80 220 155 155 Q230 90 305 155" fill="none" stroke="#c41e3a" strokeWidth="0.3" opacity="0.4" /></g>
+      <g className="spin5"><ellipse cx="155" cy="155" rx="90" ry="145" fill="none" stroke="#1b4d7a" strokeWidth="0.2" opacity="0.3" /><ellipse cx="155" cy="155" rx="145" ry="90" fill="none" stroke="#c41e3a" strokeWidth="0.2" opacity="0.3" /></g>
+    </svg>
+  );
+}
+
 /* ─── LAYOUT 1: Split panel with waves (original) ─── */
 function SplitWaveFront({ t, data, uploadedImg, uploadSize, uploadOffsetX, uploadOffsetY, uploadFit }) {
   return (
     <div className="w-[570px] h-[310px] overflow-visible relative shadow-xl rounded-lg" style={{ background: t.rightPanelBg, WebkitPrintColorAdjust: 'exact', printColorAdjust: 'exact' }}>
+      <SpinningLinesWatermark />
       <div className="absolute left-0 top-0 w-[260px] h-full flex items-center justify-center rounded-l-lg" style={{ background: t.leftPanelColor, WebkitPrintColorAdjust: 'exact', printColorAdjust: 'exact', overflow: 'hidden' }}>
         <svg className="absolute inset-0 w-full h-full" viewBox="0 0 260 310" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -107,6 +131,7 @@ function FullBleedFront({ t, data, uploadedImg, uploadSize, uploadOffsetX, uploa
 function MinimalFront({ t, data, uploadedImg, uploadSize, uploadOffsetX, uploadOffsetY, uploadFit }) {
   return (
     <div className="w-[570px] h-[310px] overflow-hidden relative shadow-xl rounded-lg flex flex-col" style={{ background: t.cardBg || '#ffffff' }}>
+      <SpinningLinesWatermark />
       <div className="h-[3px] w-full" style={{ background: t.accentColor }} />
       <div className="flex-1 flex items-center px-10 py-8">
         <div className="flex-1">
@@ -135,6 +160,7 @@ function MinimalFront({ t, data, uploadedImg, uploadSize, uploadOffsetX, uploadO
 function BorderedFront({ t, data, uploadedImg, uploadSize, uploadOffsetX, uploadOffsetY, uploadFit }) {
   return (
     <div className="w-[570px] h-[310px] overflow-hidden relative shadow-xl rounded-lg" style={{ background: t.cardBg || '#fefcf5' }}>
+      <SpinningLinesWatermark />
       <div className="absolute inset-[12px] rounded-md" style={{ border: `1.5px solid ${t.borderColor || '#c9a96e'}` }} />
       <div className="absolute inset-[18px] rounded-sm" style={{ border: `0.5px solid ${t.borderColor || '#c9a96e'}66` }} />
       {t.showOrnaments && (
@@ -172,6 +198,7 @@ function BorderedFront({ t, data, uploadedImg, uploadSize, uploadOffsetX, upload
 function DiagonalFront({ t, data, uploadedImg, uploadSize, uploadOffsetX, uploadOffsetY, uploadFit }) {
   return (
     <div className="w-[570px] h-[310px] overflow-hidden relative shadow-xl rounded-lg" style={{ background: t.bgColor || '#ffffff' }}>
+      <SpinningLinesWatermark />
       <svg className="absolute inset-0 w-full h-full" viewBox="0 0 570 310" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
         <polygon points="0,0 340,0 200,310 0,310" fill={t.diagonalColor1} />
         <polygon points="340,0 570,0 570,310 200,310" fill={t.diagonalColor2} />
