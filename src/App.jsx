@@ -83,7 +83,7 @@ function App() {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 no-print">
       <div className="w-full max-w-2xl mx-auto px-4 py-12">
         <h1 className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-rose-400 text-4xl font-bold text-center mb-12 tracking-tight">
-          Business Card Editor
+          Business Card
         </h1>
 
         {/* Card Preview */}
