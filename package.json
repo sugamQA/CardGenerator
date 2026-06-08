@@ -11,7 +11,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "start": "npx serve dist -p $PORT --single"
+    "start": "node server.js"
   },
   "dependencies": {
     "qrcode.react": "^4.2.0",
