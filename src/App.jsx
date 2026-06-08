@@ -177,6 +177,60 @@ function App() {
           </div>
 
           <div className="max-w-lg mx-auto space-y-6">
+            {/* Logo Upload */}
+            <div className="mb-2">
+              <label className="block text-white/60 text-[11px] font-semibold uppercase tracking-[0.15em] mb-3 group-focus-within:text-pink-400 transition-colors duration-200">Card Logo</label>
+              <div className="flex items-center gap-5 p-4 rounded-2xl bg-white/5 border border-white/10">
+                <div className="w-16 h-16 rounded-xl bg-white/10 flex items-center justify-center overflow-hidden shrink-0 ring-1 ring-white/10">
+                  {uploadedImg ? (
+                    <img src={uploadedImg} alt="Logo" className="w-full h-full object-contain" />
+                  ) : (
+                    <img src={logoImg} alt="Logo" className="w-full h-full object-contain" />
+                  )}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <input
+                    type="file"
+                    accept="image/png, image/jpeg"
+                    onChange={handleUpload}
+                    className="w-full text-xs text-white/50 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-gradient-to-r file:from-pink-500/30 file:to-rose-500/30 file:text-pink-200 file:cursor-pointer hover:file:from-pink-500/40 hover:file:to-rose-500/40 file:transition-all duration-300 cursor-pointer"
+                  />
+                  {uploadedImg && (
+                    <button onClick={removeUpload} className="mt-2 text-[11px] text-red-400/70 hover:text-red-400 transition-colors">
+                      Remove logo
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              {uploadedImg && (
+                <div className="mt-3 p-4 rounded-2xl bg-white/5 border border-white/10 space-y-3">
+                  <div className="flex items-center justify-center gap-3">
+                    <label className="text-white/50 text-[10px] font-medium w-6">Size</label>
+                    <input type="range" min="40" max="220" value={uploadSize} onChange={(e)=>setUploadSize(Number(e.target.value))} className="flex-1 max-w-[180px] accent-pink-500" />
+                    <span className="text-white/70 text-[11px] w-10 text-right font-mono">{uploadSize}px</span>
+                  </div>
+                  <div className="flex items-center justify-center gap-3">
+                    <label className="text-white/50 text-[10px] font-medium w-6">X</label>
+                    <input type="range" min="-80" max="80" value={uploadOffsetX} onChange={(e)=>setUploadOffsetX(Number(e.target.value))} className="flex-1 max-w-[180px] accent-pink-500" />
+                    <span className="text-white/70 text-[11px] w-10 text-right font-mono">{uploadOffsetX}</span>
+                  </div>
+                  <div className="flex items-center justify-center gap-3">
+                    <label className="text-white/50 text-[10px] font-medium w-6">Y</label>
+                    <input type="range" min="-80" max="80" value={uploadOffsetY} onChange={(e)=>setUploadOffsetY(Number(e.target.value))} className="flex-1 max-w-[180px] accent-pink-500" />
+                    <span className="text-white/70 text-[11px] w-10 text-right font-mono">{uploadOffsetY}</span>
+                  </div>
+                  <div className="flex items-center justify-center gap-3">
+                    <label className="text-white/50 text-[10px] font-medium w-6">Fit</label>
+                    <select value={uploadFit} onChange={(e)=>setUploadFit(e.target.value)} className="px-3 py-1.5 rounded-lg bg-white/10 border border-white/10 text-white/80 text-[11px] focus:outline-none focus:border-pink-500/50">
+                      <option value="contain">Contain</option>
+                      <option value="cover">Cover</option>
+                    </select>
+                  </div>
+                </div>
+              )}
+            </div>
+
             <div className="group">
               <label className="block text-white/60 text-[11px] font-semibold uppercase tracking-[0.15em] mb-2 group-focus-within:text-pink-400 transition-colors duration-200">Full Name</label>
               <input
@@ -247,47 +301,6 @@ function App() {
               />
             </div>
 
-            <div className="group">
-              <label className="block text-white/60 text-[11px] font-semibold uppercase tracking-[0.15em] mb-2 group-focus-within:text-pink-400 transition-colors duration-200">Upload Image</label>
-              <div className="relative">
-                <input
-                  type="file"
-                  accept="image/png, image/jpeg"
-                  onChange={handleUpload}
-                  className="w-full text-sm text-white/50 file:mr-4 file:py-3 file:px-6 file:rounded-2xl file:border-0 file:text-sm file:font-semibold file:bg-gradient-to-r file:from-pink-500/30 file:to-rose-500/30 file:text-pink-200 file:cursor-pointer hover:file:from-pink-500/40 hover:file:to-rose-500/40 file:transition-all duration-300 cursor-pointer"
-                />
-              </div>
-
-              {uploadedImg && (
-                <div className="mt-4 p-5 rounded-2xl bg-white/5 border border-white/10 space-y-4">
-                  <div className="flex items-center justify-center gap-3">
-                    <label className="text-white/50 text-xs font-medium w-8">Size</label>
-                    <input type="range" min="40" max="220" value={uploadSize} onChange={(e)=>setUploadSize(Number(e.target.value))} className="flex-1 max-w-[180px] accent-pink-500" />
-                    <span className="text-white/70 text-xs w-10 text-right font-mono">{uploadSize}px</span>
-                  </div>
-                  <div className="flex items-center justify-center gap-3">
-                    <label className="text-white/50 text-xs font-medium w-8">X</label>
-                    <input type="range" min="-80" max="80" value={uploadOffsetX} onChange={(e)=>setUploadOffsetX(Number(e.target.value))} className="flex-1 max-w-[180px] accent-pink-500" />
-                    <span className="text-white/70 text-xs w-10 text-right font-mono">{uploadOffsetX}</span>
-                  </div>
-                  <div className="flex items-center justify-center gap-3">
-                    <label className="text-white/50 text-xs font-medium w-8">Y</label>
-                    <input type="range" min="-80" max="80" value={uploadOffsetY} onChange={(e)=>setUploadOffsetY(Number(e.target.value))} className="flex-1 max-w-[180px] accent-pink-500" />
-                    <span className="text-white/70 text-xs w-10 text-right font-mono">{uploadOffsetY}</span>
-                  </div>
-                  <div className="flex items-center justify-center gap-3">
-                    <label className="text-white/50 text-xs font-medium w-8">Fit</label>
-                    <select value={uploadFit} onChange={(e)=>setUploadFit(e.target.value)} className="px-4 py-2 rounded-xl bg-white/10 border border-white/10 text-white/80 text-xs focus:outline-none focus:border-pink-500/50">
-                      <option value="contain">Contain</option>
-                      <option value="cover">Cover</option>
-                    </select>
-                    <button onClick={removeUpload} className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-red-500/20 to-rose-500/20 text-red-300 text-xs font-semibold hover:from-red-500/30 hover:to-rose-500/30 transition-all duration-200">
-                      Remove
-                    </button>
-                  </div>
-                </div>
-              )}
-            </div>
           </div>
 
           <div className="mt-8 pt-6 border-t border-white/10 flex flex-col items-center gap-5">
