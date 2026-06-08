@@ -1,6 +1,18 @@
 import { QRCodeSVG } from 'qrcode.react';
 import logoImg from '../assets/logo.png';
 
+/* ─── Icon SVGs ─── */
+const MailIcon = () => (
+  <svg className="inline-block mr-1" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="4" width="20" height="16" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+  </svg>
+);
+const PhoneIcon = () => (
+  <svg className="inline-block mr-1" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+  </svg>
+);
+
 /* ─── LAYOUT 1: Split panel with waves (original) ─── */
 function SplitWaveFront({ t, data, uploadedImg, uploadSize, uploadOffsetX, uploadOffsetY, uploadFit }) {
   return (
@@ -48,8 +60,8 @@ function SplitWaveFront({ t, data, uploadedImg, uploadSize, uploadOffsetX, uploa
             <div className="text-[16px] font-bold" style={{ color: t.nameColor }}>{data.name}</div>
             <div className="text-[12px] font-semibold mt-[6px]" style={{ color: t.titleColor }}>{data.title}</div>
             <div className="mt-[12px] text-[11px]" style={{ color: t.contactColor }}>
-              <div>{data.email}</div>
-              <div className="mt-[4px]">{data.phone}</div>
+              <div><MailIcon />{data.email}</div>
+              <div className="mt-[4px]"><PhoneIcon />{data.phone}</div>
             </div>
           </div>
         </div>
@@ -62,16 +74,13 @@ function SplitWaveFront({ t, data, uploadedImg, uploadSize, uploadOffsetX, uploa
 function FullBleedFront({ t, data, uploadedImg, uploadSize, uploadOffsetX, uploadOffsetY, uploadFit }) {
   return (
     <div className="w-[570px] h-[310px] overflow-hidden relative shadow-xl rounded-lg flex flex-col items-center justify-center" style={{ background: t.background, position: 'relative' }}>
-      {/* Decorative overlay shapes */}
       {t.showOverlayShapes && (
         <div className="absolute inset-0 overflow-hidden opacity-[0.07]">
           <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full" style={{ background: t.overlayColor || '#ffffff' }} />
           <div className="absolute -bottom-16 -left-16 w-48 h-48 rounded-full" style={{ background: t.overlayColor2 || '#ffffff' }} />
         </div>
       )}
-      {/* Content */}
       <div className="relative z-10 flex flex-col items-center px-12 w-full h-full justify-center">
-        {/* QR top-right */}
         <div className="absolute top-4 right-4">
           <div style={{ background: t.qrBg || 'rgba(255,255,255,0.15)', padding: '6px', borderRadius: '8px', backdropFilter: 'blur(4px)' }}>
             <QRCodeSVG value={data.qrUrl} size={56} fgColor={t.qrFgColor || '#ffffff'} bgColor="transparent" level="M" />
@@ -85,7 +94,7 @@ function FullBleedFront({ t, data, uploadedImg, uploadSize, uploadOffsetX, uploa
         <div className="text-center text-[13px] font-bold" style={{ color: t.nameColor || '#ffffff' }}>{data.name}</div>
         <div className="text-[11px] mt-1 font-medium" style={{ color: t.titleColor || 'rgba(255,255,255,0.8)' }}>{data.title}</div>
         <div className="mt-3 text-[10px] text-center" style={{ color: t.contactColor || 'rgba(255,255,255,0.6)' }}>
-          <span>{data.phone}</span><span className="mx-2">|</span><span>{data.email}</span>
+          <span><PhoneIcon />{data.phone}</span><span className="mx-2">|</span><span><MailIcon />{data.email}</span>
         </div>
         <div className="mt-2 text-[10px] font-semibold tracking-wider" style={{ color: t.websiteColor || 'rgba(255,255,255,0.7)' }}>{data.website}</div>
       </div>
@@ -97,22 +106,19 @@ function FullBleedFront({ t, data, uploadedImg, uploadSize, uploadOffsetX, uploa
 function MinimalFront({ t, data, uploadedImg, uploadSize, uploadOffsetX, uploadOffsetY, uploadFit }) {
   return (
     <div className="w-[570px] h-[310px] overflow-hidden relative shadow-xl rounded-lg flex flex-col" style={{ background: t.cardBg || '#ffffff' }}>
-      {/* Thin top accent */}
       <div className="h-[3px] w-full" style={{ background: t.accentColor }} />
       <div className="flex-1 flex items-center px-10 py-8">
-        {/* Left: info */}
         <div className="flex-1">
           <img src={uploadedImg || logoImg} alt="Logo" className="mb-4" style={{ width: `${Math.min(uploadSize, 80)}px`, height: `${Math.min(uploadSize, 80)}px`, objectFit: uploadFit, transform: `translate(${uploadOffsetX}px, ${uploadOffsetY}px)` }} />
           <h1 className="text-[13px] font-bold tracking-[0.3em] uppercase" style={{ color: t.accentColor }}>Imperial Innovation Fund</h1>
           <div className="text-[22px] font-bold mt-3" style={{ color: t.nameColor || '#1a1a1a' }}>{data.name}</div>
           <div className="text-[12px] font-medium mt-1" style={{ color: t.titleColor || '#888' }}>{data.title}</div>
           <div className="mt-4 text-[10px] space-y-1" style={{ color: t.contactColor || '#aaa' }}>
-            <div>{data.email}</div>
-            <div>{data.phone}</div>
+            <div><MailIcon />{data.email}</div>
+            <div><PhoneIcon />{data.phone}</div>
             <div>{data.website}</div>
           </div>
         </div>
-        {/* Right: QR */}
         <div className="flex flex-col items-center ml-6">
           <div style={{ background: t.qrBg || '#f5f5f5', padding: '8px', borderRadius: '12px' }}>
             <QRCodeSVG value={data.qrUrl} size={80} fgColor={t.qrFgColor || t.accentColor} bgColor="transparent" level="M" />
@@ -128,10 +134,8 @@ function MinimalFront({ t, data, uploadedImg, uploadSize, uploadOffsetX, uploadO
 function BorderedFront({ t, data, uploadedImg, uploadSize, uploadOffsetX, uploadOffsetY, uploadFit }) {
   return (
     <div className="w-[570px] h-[310px] overflow-hidden relative shadow-xl rounded-lg" style={{ background: t.cardBg || '#fefcf5' }}>
-      {/* Outer border frame */}
       <div className="absolute inset-[12px] rounded-md" style={{ border: `1.5px solid ${t.borderColor || '#c9a96e'}` }} />
       <div className="absolute inset-[18px] rounded-sm" style={{ border: `0.5px solid ${t.borderColor || '#c9a96e'}66` }} />
-      {/* Corner ornaments */}
       {t.showOrnaments && (
         <>
           <div className="absolute top-[8px] left-[8px] w-6 h-6" style={{ borderTop: `2px solid ${t.borderColor}`, borderLeft: `2px solid ${t.borderColor}` }} />
@@ -140,7 +144,6 @@ function BorderedFront({ t, data, uploadedImg, uploadSize, uploadOffsetX, upload
           <div className="absolute bottom-[8px] right-[8px] w-6 h-6" style={{ borderBottom: `2px solid ${t.borderColor}`, borderRight: `2px solid ${t.borderColor}` }} />
         </>
       )}
-      {/* Content */}
       <div className="absolute inset-[28px] flex">
         <div className="flex-1 flex flex-col justify-center">
           <img src={uploadedImg || logoImg} alt="Logo" className="mb-4" style={{ width: `${Math.min(uploadSize, 70)}px`, height: `${Math.min(uploadSize, 70)}px`, objectFit: uploadFit, transform: `translate(${uploadOffsetX}px, ${uploadOffsetY}px)` }} />
@@ -148,8 +151,8 @@ function BorderedFront({ t, data, uploadedImg, uploadSize, uploadOffsetX, upload
           <div className="text-[11px] font-medium mt-1 tracking-wider uppercase" style={{ color: t.titleColor || '#c9a96e' }}>{data.title}</div>
           <div className="w-10 h-[1.5px] my-3" style={{ background: t.accentColor || '#c9a96e' }} />
           <div className="text-[10px] space-y-0.5" style={{ color: t.contactColor || '#8b7355' }}>
-            <div>{data.email}</div>
-            <div>{data.phone}</div>
+            <div><MailIcon />{data.email}</div>
+            <div><PhoneIcon />{data.phone}</div>
           </div>
         </div>
         <div className="flex flex-col items-center justify-center ml-4">
@@ -167,28 +170,25 @@ function BorderedFront({ t, data, uploadedImg, uploadSize, uploadOffsetX, upload
 function DiagonalFront({ t, data, uploadedImg, uploadSize, uploadOffsetX, uploadOffsetY, uploadFit }) {
   return (
     <div className="w-[570px] h-[310px] overflow-hidden relative shadow-xl rounded-lg" style={{ background: t.bgColor || '#ffffff' }}>
-      {/* Diagonal shape */}
       <svg className="absolute inset-0 w-full h-full" viewBox="0 0 570 310" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
         <polygon points="0,0 340,0 200,310 0,310" fill={t.diagonalColor1} />
         <polygon points="340,0 570,0 570,310 200,310" fill={t.diagonalColor2} />
         <line x1="340" y1="0" x2="200" y2="310" stroke={t.dividerLine || t.diagonalColor2} strokeWidth="1" />
       </svg>
-      {/* QR on right side */}
       <div className="absolute right-6 top-1/2 -translate-y-1/2 z-10 flex flex-col items-center">
         <div style={{ background: t.qrBg || 'rgba(255,255,255,0.15)', padding: '8px', borderRadius: '12px', backdropFilter: 'blur(4px)' }}>
           <QRCodeSVG value={data.qrUrl} size={80} fgColor={t.qrFgColor || '#ffffff'} bgColor="transparent" level="M" />
         </div>
         {t.showScanMe && <div className="mt-1 text-[9px] font-semibold tracking-wider" style={{ color: t.qrFgColor || '#ffffff', opacity: 0.7 }}>SCAN</div>}
       </div>
-      {/* Content on left side */}
       <div className="absolute left-8 top-1/2 -translate-y-1/2 z-10 max-w-[200px]">
         <img src={uploadedImg || logoImg} alt="Logo" className="mb-4" style={{ width: `${Math.min(uploadSize, 80)}px`, height: `${Math.min(uploadSize, 80)}px`, objectFit: uploadFit, transform: `translate(${uploadOffsetX}px, ${uploadOffsetY}px)` }} />
         <h1 className="text-[13px] font-bold tracking-[0.15em] uppercase" style={{ color: t.headingColor || '#ffffff' }}>Imperial Innovation Fund</h1>
         <div className="text-[18px] font-bold mt-2" style={{ color: t.nameColor || '#ffffff' }}>{data.name}</div>
         <div className="text-[11px] font-medium mt-0.5" style={{ color: t.titleColor || 'rgba(255,255,255,0.8)' }}>{data.title}</div>
         <div className="mt-3 text-[10px]" style={{ color: t.contactColor || 'rgba(255,255,255,0.6)' }}>
-          <div>{data.email}</div>
-          <div>{data.phone}</div>
+          <div><MailIcon />{data.email}</div>
+          <div><PhoneIcon />{data.phone}</div>
         </div>
       </div>
     </div>
