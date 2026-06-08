@@ -18,6 +18,11 @@ function SpinningLinesWatermark() {
   return (
     <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" viewBox="0 0 310 310" xmlns="http://www.w3.org/2000/svg">
       <defs>
+        <linearGradient id="waterGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#1b4d7a" />
+          <stop offset="50%" stopColor="#c41e3a" />
+          <stop offset="100%" stopColor="#1b4d7a" />
+        </linearGradient>
         <style>{`
           @keyframes spin { 100% { transform: rotate(360deg); } }
           .spin1 { animation: spin 20s linear infinite; transform-origin: 155px 155px; }
@@ -27,11 +32,11 @@ function SpinningLinesWatermark() {
           .spin5 { animation: spin 40s linear infinite; transform-origin: 155px 155px; }
         `}</style>
       </defs>
-      <g className="spin1"><circle cx="155" cy="155" r="140" fill="none" stroke="#1b4d7a" strokeWidth="0.3" /><circle cx="155" cy="155" r="120" fill="none" stroke="#1b4d7a" strokeWidth="0.25" /></g>
-      <g className="spin2"><circle cx="155" cy="155" r="130" fill="none" stroke="#c41e3a" strokeWidth="0.3" strokeDasharray="8 12" /><circle cx="155" cy="155" r="100" fill="none" stroke="#c41e3a" strokeWidth="0.2" strokeDasharray="4 8" /></g>
-      <g className="spin3"><path d="M155 5 Q220 80 155 155 Q90 230 155 305" fill="none" stroke="#1b4d7a" strokeWidth="0.4" opacity="0.5" /><path d="M155 5 Q90 80 155 155 Q220 230 155 305" fill="none" stroke="#1b4d7a" strokeWidth="0.4" opacity="0.5" /></g>
-      <g className="spin4"><path d="M5 155 Q80 90 155 155 Q230 220 305 155" fill="none" stroke="#c41e3a" strokeWidth="0.3" opacity="0.4" /><path d="M5 155 Q80 220 155 155 Q230 90 305 155" fill="none" stroke="#c41e3a" strokeWidth="0.3" opacity="0.4" /></g>
-      <g className="spin5"><ellipse cx="155" cy="155" rx="90" ry="145" fill="none" stroke="#1b4d7a" strokeWidth="0.2" opacity="0.3" /><ellipse cx="155" cy="155" rx="145" ry="90" fill="none" stroke="#c41e3a" strokeWidth="0.2" opacity="0.3" /></g>
+      <g className="spin1"><circle cx="155" cy="155" r="140" fill="none" stroke="url(#waterGrad)" strokeWidth="0.3" /><circle cx="155" cy="155" r="120" fill="none" stroke="url(#waterGrad)" strokeWidth="0.25" /></g>
+      <g className="spin2"><circle cx="155" cy="155" r="130" fill="none" stroke="url(#waterGrad)" strokeWidth="0.3" strokeDasharray="8 12" /><circle cx="155" cy="155" r="100" fill="none" stroke="url(#waterGrad)" strokeWidth="0.2" strokeDasharray="4 8" /></g>
+      <g className="spin3"><path d="M155 5 Q220 80 155 155 Q90 230 155 305" fill="none" stroke="url(#waterGrad)" strokeWidth="0.4" opacity="0.5" /><path d="M155 5 Q90 80 155 155 Q220 230 155 305" fill="none" stroke="url(#waterGrad)" strokeWidth="0.4" opacity="0.5" /></g>
+      <g className="spin4"><path d="M5 155 Q80 90 155 155 Q230 220 305 155" fill="none" stroke="url(#waterGrad)" strokeWidth="0.3" opacity="0.4" /><path d="M5 155 Q80 220 155 155 Q230 90 305 155" fill="none" stroke="url(#waterGrad)" strokeWidth="0.3" opacity="0.4" /></g>
+      <g className="spin5"><ellipse cx="155" cy="155" rx="90" ry="145" fill="none" stroke="url(#waterGrad)" strokeWidth="0.2" opacity="0.3" /><ellipse cx="155" cy="155" rx="145" ry="90" fill="none" stroke="url(#waterGrad)" strokeWidth="0.2" opacity="0.3" /></g>
     </svg>
   );
 }
