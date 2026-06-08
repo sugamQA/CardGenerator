@@ -46,22 +46,23 @@ function SplitWaveFront({ t, data, uploadedImg, uploadSize, uploadOffsetX, uploa
         )}
       </div>
       <div className="absolute right-0 top-0 w-[310px] h-full flex flex-col items-center justify-start p-[20px]" style={{ background: t.rightPanelBg }}>
-        <h1 className="text-center text-[18px] leading-[1.05] mb-[8px] w-full" style={{ letterSpacing: '0.2px', marginTop: '18px', fontWeight: 900, whiteSpace: 'nowrap', overflow: 'hidden' }}>
-          <span style={{ color: t.companyColors?.first, fontWeight: 900 }}>Imperial</span>
-          <span style={{ color: t.companyColors?.second, marginLeft: '10px', fontWeight: 800 }}>Innovation Fund Limited</span>
+        <h1 className="text-center text-[17px] leading-[1.1] mb-[6px] w-full" style={{ letterSpacing: '0.5px', marginTop: '16px', fontWeight: 800 }}>
+          <span style={{ color: t.companyColors?.first }}>Imperial</span>
+          <span style={{ color: t.companyColors?.second, marginLeft: '8px' }}>Innovation Fund</span>
         </h1>
-        <img src={uploadedImg || logoImg} alt="Logo" className="mb-[12px] mt-[5px]" style={{ width: `${uploadSize}px`, height: `${uploadSize}px`, objectFit: uploadFit, transform: `translate(${uploadOffsetX}px, ${uploadOffsetY}px)`, transition: 'transform 120ms linear, width 120ms linear, height 120ms linear' }} />
-        <div className="flex items-stretch gap-0 w-full mb-[12px]">
-          <div className="flex-1 py-[6px] px-[12px] text-center text-[9px] font-semibold flex items-center justify-center" style={{ background: t.websiteBg, color: t.websiteTextColor || '#ffffff' }}>{data.website}</div>
-          <div className="w-[25px] h-auto min-h-[24px]" style={{ background: t.websiteAccent }} />
+        <div className="w-8 h-[2px] rounded-full mb-[6px]" style={{ background: t.accentColor }} />
+        <img src={uploadedImg || logoImg} alt="Logo" className="mb-[10px] mt-[3px]" style={{ width: `${uploadSize}px`, height: `${uploadSize}px`, objectFit: uploadFit, transform: `translate(${uploadOffsetX}px, ${uploadOffsetY}px)`, transition: 'transform 120ms linear, width 120ms linear, height 120ms linear' }} />
+        <div className="flex items-stretch gap-0 w-full mb-[10px]">
+          <div className="flex-1 py-[5px] px-[12px] text-center text-[9px] font-semibold flex items-center justify-center tracking-wider" style={{ background: t.websiteBg, color: t.websiteTextColor || '#ffffff' }}>{data.website}</div>
+          <div className="w-[25px] h-auto min-h-[22px]" style={{ background: t.websiteAccent }} />
         </div>
         <div className="flex-1 flex items-center justify-center">
-          <div className="w-full text-center pb-[14px]">
-            <div className="text-[16px] font-bold" style={{ color: t.nameColor }}>{data.name}</div>
-            <div className="text-[12px] font-semibold mt-[6px]" style={{ color: t.titleColor }}>{data.title}</div>
-            <div className="mt-[12px] text-[11px]" style={{ color: t.contactColor }}>
+          <div className="w-full text-center pb-[12px]">
+            <div className="text-[16px] font-bold tracking-tight" style={{ color: t.nameColor }}>{data.name}</div>
+            <div className="text-[11px] font-semibold mt-[4px] tracking-wide" style={{ color: t.titleColor }}>{data.title}</div>
+            <div className="mt-[10px] text-[10px]" style={{ color: t.contactColor }}>
               <div><MailIcon />{data.email}</div>
-              <div className="mt-[4px]"><PhoneIcon />{data.phone}</div>
+              <div className="mt-[3px]"><PhoneIcon />{data.phone}</div>
             </div>
           </div>
         </div>
@@ -86,17 +87,17 @@ function FullBleedFront({ t, data, uploadedImg, uploadSize, uploadOffsetX, uploa
             <QRCodeSVG value={data.qrUrl} size={56} fgColor={t.qrFgColor || '#ffffff'} bgColor="transparent" level="M" />
           </div>
         </div>
-        <img src={uploadedImg || logoImg} alt="Logo" className="mb-3" style={{ width: `${Math.min(uploadSize, 100)}px`, height: `${Math.min(uploadSize, 100)}px`, objectFit: uploadFit, transform: `translate(${uploadOffsetX}px, ${uploadOffsetY}px)` }} />
-        <h1 className="text-center font-bold" style={{ color: t.headingColor || '#ffffff', fontSize: '16px', letterSpacing: '0.5px' }}>
-          Imperial Innovation Fund Limited
+        <img src={uploadedImg || logoImg} alt="Logo" className="mb-2" style={{ width: `${Math.min(uploadSize, 90)}px`, height: `${Math.min(uploadSize, 90)}px`, objectFit: uploadFit, transform: `translate(${uploadOffsetX}px, ${uploadOffsetY}px)` }} />
+        <h1 className="text-center font-bold leading-tight" style={{ color: t.headingColor || '#ffffff', fontSize: '15px', letterSpacing: '1px', textShadow: '0 1px 3px rgba(0,0,0,0.3)' }}>
+          Imperial Innovation Fund
         </h1>
-        <div className="w-12 h-[2px] my-3 rounded-full" style={{ background: t.dividerColor || 'rgba(255,255,255,0.4)' }} />
-        <div className="text-center text-[13px] font-bold" style={{ color: t.nameColor || '#ffffff' }}>{data.name}</div>
-        <div className="text-[11px] mt-1 font-medium" style={{ color: t.titleColor || 'rgba(255,255,255,0.8)' }}>{data.title}</div>
-        <div className="mt-3 text-[10px] text-center" style={{ color: t.contactColor || 'rgba(255,255,255,0.6)' }}>
+        <div className="w-10 h-[2px] my-2 rounded-full" style={{ background: t.dividerColor || 'rgba(255,255,255,0.4)' }} />
+        <div className="text-center text-[13px] font-bold tracking-tight" style={{ color: t.nameColor || '#ffffff' }}>{data.name}</div>
+        <div className="text-[10px] mt-1 font-medium tracking-wider uppercase" style={{ color: t.titleColor || 'rgba(255,255,255,0.8)' }}>{data.title}</div>
+        <div className="mt-2 text-[10px] text-center" style={{ color: t.contactColor || 'rgba(255,255,255,0.6)' }}>
           <span><PhoneIcon />{data.phone}</span><span className="mx-2">|</span><span><MailIcon />{data.email}</span>
         </div>
-        <div className="mt-2 text-[10px] font-semibold tracking-wider" style={{ color: t.websiteColor || 'rgba(255,255,255,0.7)' }}>{data.website}</div>
+        <div className="mt-1 text-[10px] font-semibold tracking-wider" style={{ color: t.websiteColor || 'rgba(255,255,255,0.7)' }}>{data.website}</div>
       </div>
     </div>
   );
@@ -109,14 +110,14 @@ function MinimalFront({ t, data, uploadedImg, uploadSize, uploadOffsetX, uploadO
       <div className="h-[3px] w-full" style={{ background: t.accentColor }} />
       <div className="flex-1 flex items-center px-10 py-8">
         <div className="flex-1">
-          <img src={uploadedImg || logoImg} alt="Logo" className="mb-4" style={{ width: `${Math.min(uploadSize, 80)}px`, height: `${Math.min(uploadSize, 80)}px`, objectFit: uploadFit, transform: `translate(${uploadOffsetX}px, ${uploadOffsetY}px)` }} />
-          <h1 className="text-[13px] font-bold tracking-[0.3em] uppercase" style={{ color: t.accentColor }}>Imperial Innovation Fund</h1>
-          <div className="text-[22px] font-bold mt-3" style={{ color: t.nameColor || '#1a1a1a' }}>{data.name}</div>
-          <div className="text-[12px] font-medium mt-1" style={{ color: t.titleColor || '#888' }}>{data.title}</div>
-          <div className="mt-4 text-[10px] space-y-1" style={{ color: t.contactColor || '#aaa' }}>
+          <img src={uploadedImg || logoImg} alt="Logo" className="mb-3" style={{ width: `${Math.min(uploadSize, 75)}px`, height: `${Math.min(uploadSize, 75)}px`, objectFit: uploadFit, transform: `translate(${uploadOffsetX}px, ${uploadOffsetY}px)` }} />
+          <h1 className="text-[12px] font-bold tracking-[0.35em] uppercase" style={{ color: t.accentColor, letterSpacing: '0.35em' }}>Imperial Innovation Fund</h1>
+          <div className="text-[20px] font-bold mt-2 tracking-tight" style={{ color: t.nameColor || '#1a1a1a' }}>{data.name}</div>
+          <div className="text-[11px] font-medium mt-1 tracking-wide" style={{ color: t.titleColor || '#888' }}>{data.title}</div>
+          <div className="mt-3 text-[10px] space-y-1" style={{ color: t.contactColor || '#aaa' }}>
             <div><MailIcon />{data.email}</div>
             <div><PhoneIcon />{data.phone}</div>
-            <div>{data.website}</div>
+            <div><svg className="inline-block ml-1 mr-5" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>{data.website}</div>
           </div>
         </div>
         <div className="flex flex-col items-center ml-6">
@@ -146,10 +147,11 @@ function BorderedFront({ t, data, uploadedImg, uploadSize, uploadOffsetX, upload
       )}
       <div className="absolute inset-[28px] flex">
         <div className="flex-1 flex flex-col justify-center">
-          <img src={uploadedImg || logoImg} alt="Logo" className="mb-4" style={{ width: `${Math.min(uploadSize, 70)}px`, height: `${Math.min(uploadSize, 70)}px`, objectFit: uploadFit, transform: `translate(${uploadOffsetX}px, ${uploadOffsetY}px)` }} />
-          <div className="text-[20px] font-bold tracking-tight" style={{ color: t.nameColor || '#2c1810' }}>{data.name}</div>
+          <img src={uploadedImg || logoImg} alt="Logo" className="mb-3" style={{ width: `${Math.min(uploadSize, 65)}px`, height: `${Math.min(uploadSize, 65)}px`, objectFit: uploadFit, transform: `translate(${uploadOffsetX}px, ${uploadOffsetY}px)` }} />
+          <div className="text-[12px] font-semibold tracking-[0.25em] uppercase" style={{ color: t.accentColor || '#c9a96e', letterSpacing: '0.25em' }}>Imperial Innovation Fund</div>
+          <div className="text-[19px] font-bold tracking-tight mt-1" style={{ color: t.nameColor || '#2c1810' }}>{data.name}</div>
           <div className="text-[11px] font-medium mt-1 tracking-wider uppercase" style={{ color: t.titleColor || '#c9a96e' }}>{data.title}</div>
-          <div className="w-10 h-[1.5px] my-3" style={{ background: t.accentColor || '#c9a96e' }} />
+          <div className="w-10 h-[1.5px] my-2" style={{ background: t.accentColor || '#c9a96e' }} />
           <div className="text-[10px] space-y-0.5" style={{ color: t.contactColor || '#8b7355' }}>
             <div><MailIcon />{data.email}</div>
             <div><PhoneIcon />{data.phone}</div>
@@ -182,11 +184,12 @@ function DiagonalFront({ t, data, uploadedImg, uploadSize, uploadOffsetX, upload
         {t.showScanMe && <div className="mt-1 text-[9px] font-semibold tracking-wider" style={{ color: t.qrFgColor || '#ffffff', opacity: 0.7 }}>SCAN</div>}
       </div>
       <div className="absolute left-8 top-1/2 -translate-y-1/2 z-10 max-w-[200px]">
-        <img src={uploadedImg || logoImg} alt="Logo" className="mb-4" style={{ width: `${Math.min(uploadSize, 80)}px`, height: `${Math.min(uploadSize, 80)}px`, objectFit: uploadFit, transform: `translate(${uploadOffsetX}px, ${uploadOffsetY}px)` }} />
-        <h1 className="text-[13px] font-bold tracking-[0.15em] uppercase" style={{ color: t.headingColor || '#ffffff' }}>Imperial Innovation Fund</h1>
-        <div className="text-[18px] font-bold mt-2" style={{ color: t.nameColor || '#ffffff' }}>{data.name}</div>
-        <div className="text-[11px] font-medium mt-0.5" style={{ color: t.titleColor || 'rgba(255,255,255,0.8)' }}>{data.title}</div>
-        <div className="mt-3 text-[10px]" style={{ color: t.contactColor || 'rgba(255,255,255,0.6)' }}>
+        <img src={uploadedImg || logoImg} alt="Logo" className="mb-3" style={{ width: `${Math.min(uploadSize, 75)}px`, height: `${Math.min(uploadSize, 75)}px`, objectFit: uploadFit, transform: `translate(${uploadOffsetX}px, ${uploadOffsetY}px)` }} />
+        <h1 className="text-[12px] font-bold tracking-[0.2em] uppercase" style={{ color: t.headingColor || '#ffffff', letterSpacing: '0.2em' }}>Imperial Innovation Fund</h1>
+        <div className="w-8 h-[2px] my-2 rounded-full" style={{ background: t.dividerLine || 'rgba(255,255,255,0.3)' }} />
+        <div className="text-[17px] font-bold mt-1 tracking-tight" style={{ color: t.nameColor || '#ffffff' }}>{data.name}</div>
+        <div className="text-[10px] font-medium mt-0.5 tracking-wider uppercase" style={{ color: t.titleColor || 'rgba(255,255,255,0.8)' }}>{data.title}</div>
+        <div className="mt-2 text-[10px]" style={{ color: t.contactColor || 'rgba(255,255,255,0.6)' }}>
           <div><MailIcon />{data.email}</div>
           <div><PhoneIcon />{data.phone}</div>
         </div>
