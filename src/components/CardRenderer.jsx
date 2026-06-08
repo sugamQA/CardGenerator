@@ -4,7 +4,7 @@ import logoImg from '../assets/logo.png';
 /* ─── LAYOUT 1: Split panel with waves (original) ─── */
 function SplitWaveFront({ t, data, uploadedImg, uploadSize, uploadOffsetX, uploadOffsetY, uploadFit }) {
   return (
-    <div className="w-[570px] h-[310px] overflow-hidden relative shadow-xl rounded-lg shrink-0" style={{ background: t.rightPanelBg, WebkitPrintColorAdjust: 'exact', printColorAdjust: 'exact' }}>
+    <div className="w-[570px] h-[310px] overflow-visible relative shadow-xl rounded-lg" style={{ background: t.rightPanelBg, WebkitPrintColorAdjust: 'exact', printColorAdjust: 'exact' }}>
       <div className="absolute left-0 top-0 w-[260px] h-full flex items-center justify-center rounded-l-lg" style={{ background: t.leftPanelColor, WebkitPrintColorAdjust: 'exact', printColorAdjust: 'exact', overflow: 'hidden' }}>
         <svg className="absolute inset-0 w-full h-full" viewBox="0 0 260 310" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -195,31 +195,6 @@ function DiagonalFront({ t, data, uploadedImg, uploadSize, uploadOffsetX, upload
   );
 }
 
-/* ─── Scaling wrapper ─── */
-function CardScaler({ cardWidthMm, cardHeightMm, children }) {
-  const BASE_W = 570;
-  const BASE_H = 310;
-  const PX_PER_MM = 3.7795; // 96dpi
-  const targetW = cardWidthMm * PX_PER_MM;
-  const scale = Math.min(targetW / BASE_W, (cardHeightMm * PX_PER_MM) / BASE_H);
-
-  return (
-    <div
-      className="relative shrink-0"
-      style={{
-        width: `${BASE_W}px`,
-        height: `${BASE_H}px`,
-        transform: `scale(${scale})`,
-        transformOrigin: 'top left',
-      }}
-    >
-      <div className="absolute inset-0" style={{ width: `${BASE_W}px`, height: `${BASE_H}px` }}>
-        {children}
-      </div>
-    </div>
-  );
-}
-
 /* ─── Back layouts ─── */
 function DefaultBack({ t, data, uploadedImg }) {
   return (
@@ -297,35 +272,32 @@ function FullBleedBack({ t, data, uploadedImg }) {
 }
 
 /* ─── Renderer ─── */
-export default function CardRenderer({ template, data, uploadedImg, uploadSize, uploadOffsetX, uploadOffsetY, uploadFit, showBack, cardWidthMm = 85, cardHeightMm = 55 }) {
+export default function CardRenderer({ template, data, uploadedImg, uploadSize, uploadOffsetX, uploadOffsetY, uploadFit, showBack }) {
   const layout = template.layout || 'split-wave';
 
-  let inner;
   if (showBack) {
     const bt = template.back;
     switch (layout) {
       case 'minimal':
-        inner = <MinimalBack t={bt} data={data} uploadedImg={uploadedImg} />; break;
+        return <MinimalBack t={bt} data={data} uploadedImg={uploadedImg} />;
       case 'fullbleed':
-        inner = <FullBleedBack t={bt} data={data} uploadedImg={uploadedImg} />; break;
+        return <FullBleedBack t={bt} data={data} uploadedImg={uploadedImg} />;
       default:
-        inner = <DefaultBack t={bt} data={data} uploadedImg={uploadedImg} />;
-    }
-  } else {
-    const t = template.front;
-    switch (layout) {
-      case 'fullbleed':
-        inner = <FullBleedFront t={t} data={data} uploadedImg={uploadedImg} uploadSize={uploadSize} uploadOffsetX={uploadOffsetX} uploadOffsetY={uploadOffsetY} uploadFit={uploadFit} />; break;
-      case 'minimal':
-        inner = <MinimalFront t={t} data={data} uploadedImg={uploadedImg} uploadSize={uploadSize} uploadOffsetX={uploadOffsetX} uploadOffsetY={uploadOffsetY} uploadFit={uploadFit} />; break;
-      case 'bordered':
-        inner = <BorderedFront t={t} data={data} uploadedImg={uploadedImg} uploadSize={uploadSize} uploadOffsetX={uploadOffsetX} uploadOffsetY={uploadOffsetY} uploadFit={uploadFit} />; break;
-      case 'diagonal':
-        inner = <DiagonalFront t={t} data={data} uploadedImg={uploadedImg} uploadSize={uploadSize} uploadOffsetX={uploadOffsetX} uploadOffsetY={uploadOffsetY} uploadFit={uploadFit} />; break;
-      default:
-        inner = <SplitWaveFront t={t} data={data} uploadedImg={uploadedImg} uploadSize={uploadSize} uploadOffsetX={uploadOffsetX} uploadOffsetY={uploadOffsetY} uploadFit={uploadFit} />;
+        return <DefaultBack t={bt} data={data} uploadedImg={uploadedImg} />;
     }
   }
 
-  return <CardScaler cardWidthMm={cardWidthMm} cardHeightMm={cardHeightMm}>{inner}</CardScaler>;
+  const t = template.front;
+  switch (layout) {
+    case 'fullbleed':
+      return <FullBleedFront t={t} data={data} uploadedImg={uploadedImg} uploadSize={uploadSize} uploadOffsetX={uploadOffsetX} uploadOffsetY={uploadOffsetY} uploadFit={uploadFit} />;
+    case 'minimal':
+      return <MinimalFront t={t} data={data} uploadedImg={uploadedImg} uploadSize={uploadSize} uploadOffsetX={uploadOffsetX} uploadOffsetY={uploadOffsetY} uploadFit={uploadFit} />;
+    case 'bordered':
+      return <BorderedFront t={t} data={data} uploadedImg={uploadedImg} uploadSize={uploadSize} uploadOffsetX={uploadOffsetX} uploadOffsetY={uploadOffsetY} uploadFit={uploadFit} />;
+    case 'diagonal':
+      return <DiagonalFront t={t} data={data} uploadedImg={uploadedImg} uploadSize={uploadSize} uploadOffsetX={uploadOffsetX} uploadOffsetY={uploadOffsetY} uploadFit={uploadFit} />;
+    default:
+      return <SplitWaveFront t={t} data={data} uploadedImg={uploadedImg} uploadSize={uploadSize} uploadOffsetX={uploadOffsetX} uploadOffsetY={uploadOffsetY} uploadFit={uploadFit} />;
+  }
 }

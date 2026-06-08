@@ -94,7 +94,7 @@ function App() {
         </h1>
 
         {/* Template Selector */}
-        <div className="flex flex-wrap gap-3 mb-6 justify-center">
+        <div className="flex flex-wrap gap-3 mb-8 justify-center">
           {templates.map(t => (
             <button
               key={t.id}
@@ -110,49 +110,9 @@ function App() {
           ))}
         </div>
 
-        {/* Size Preset + Export Controls */}
-        <div className="flex items-center justify-center gap-4 mb-6 bg-white/5 rounded-2xl px-6 py-3 border border-white/5">
-          <label className="text-white/50 text-[10px] font-semibold uppercase tracking-wider">Size</label>
-          <div className="flex gap-2">
-            {[
-              { label: 'Standard', w: 85, h: 55 },
-              { label: 'Square', w: 55, h: 55 },
-              { label: 'Slim', w: 90, h: 50 },
-              { label: 'Large', w: 100, h: 65 },
-            ].map(p => (
-              <button
-                key={p.label}
-                onClick={() => { setExportWidth(p.w); setExportHeight(p.h); }}
-                className={`px-3 py-1.5 rounded-lg text-[11px] font-medium transition-all ${
-                  exportWidth === p.w && exportHeight === p.h
-                    ? 'bg-pink-500/30 text-pink-200'
-                    : 'bg-white/5 text-white/50 hover:bg-white/10 hover:text-white/70'
-                }`}
-              >
-                {p.label} {p.w}×{p.h}
-              </button>
-            ))}
-          </div>
-          <div className="flex items-center gap-1.5 ml-2">
-            <input type="number" value={exportWidth} onChange={(e)=>setExportWidth(Number(e.target.value))} className="w-14 px-2 py-1.5 rounded-lg bg-white/10 border border-white/10 text-white text-xs text-center focus:outline-none focus:border-pink-500/50" />
-            <span className="text-white/30 text-[10px]">×</span>
-            <input type="number" value={exportHeight} onChange={(e)=>setExportHeight(Number(e.target.value))} className="w-14 px-2 py-1.5 rounded-lg bg-white/10 border border-white/10 text-white text-xs text-center focus:outline-none focus:border-pink-500/50" />
-            <span className="text-white/40 text-[10px] font-medium">mm</span>
-          </div>
-          <button
-            onClick={exportPdf}
-            className="px-5 py-2 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold rounded-xl shadow-lg shadow-pink-500/20 hover:shadow-xl hover:shadow-pink-500/30 text-xs tracking-wide transition-all"
-          >
-            Print / PDF
-          </button>
-        </div>
-
         {/* Card Preview */}
         <div className="flex flex-col items-center gap-4 mb-16">
-          <div
-            className="p-4 bg-white/5 backdrop-blur-xl rounded-2xl shadow-2xl print-card ring-1 ring-white/10 overflow-auto"
-            style={{ display: 'flex', justifyContent: 'center' }}
-          >
+          <div className="p-4 bg-white/5 backdrop-blur-xl rounded-2xl shadow-2xl print-card ring-1 ring-white/10">
             <CardRenderer
               template={selectedTemplate}
               data={data}
@@ -162,8 +122,6 @@ function App() {
               uploadOffsetY={uploadOffsetY}
               uploadFit={uploadFit}
               showBack={showBack}
-              cardWidthMm={exportWidth}
-              cardHeightMm={exportHeight}
             />
           </div>
 
@@ -360,6 +318,26 @@ function App() {
 
           </div>
 
+          <div className="mt-8 pt-6 border-t border-white/10 flex flex-col items-center gap-5">
+            <div className="flex items-center gap-4 bg-white/5 rounded-2xl px-6 py-4 border border-white/5">
+              <label className="text-white/50 text-xs font-semibold uppercase tracking-wider">Width</label>
+              <div className="flex items-center gap-1.5">
+                <input type="number" value={exportWidth} onChange={(e)=>setExportWidth(Number(e.target.value))} className="w-20 px-3 py-2.5 rounded-xl bg-white/10 border border-white/10 text-white text-sm text-center focus:outline-none focus:border-pink-500/50 focus:ring-2 focus:ring-pink-500/10 transition-all duration-200" />
+                <span className="text-white/40 text-xs font-medium">mm</span>
+              </div>
+              <label className="text-white/50 text-xs font-semibold uppercase tracking-wider">Height</label>
+              <div className="flex items-center gap-1.5">
+                <input type="number" value={exportHeight} onChange={(e)=>setExportHeight(Number(e.target.value))} className="w-20 px-3 py-2.5 rounded-xl bg-white/10 border border-white/10 text-white text-sm text-center focus:outline-none focus:border-pink-500/50 focus:ring-2 focus:ring-pink-500/10 transition-all duration-200" />
+                <span className="text-white/40 text-xs font-medium">mm</span>
+              </div>
+            </div>
+            <button
+              onClick={exportPdf}
+              className="w-full max-w-sm px-10 py-4 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold rounded-2xl shadow-lg shadow-pink-500/20 hover:shadow-xl hover:shadow-pink-500/30 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 text-sm tracking-wide"
+            >
+              Print / Save PDF
+            </button>
+          </div>
         </div>
       </div>
     </div>
