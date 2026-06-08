@@ -10,7 +10,11 @@ const initialData = {
   email: 'prithvi.singh@imperialfund.com.np',
   website: 'imperialfund.com.np',
   tagline: 'Smart Solutions, Trusted Growth',
-  qrUrl: 'https://imperialfund.com.np/'
+  qrUrl: 'https://imperialfund.com.np/',
+  backHeading: 'Imperial Innovation Fund',
+  backSubheading: 'Smart Solutions, Trusted Growth',
+  backAddress: 'Kathmandu, Nepal',
+  backSocial: '@imperialfund'
 };
 
 function App() {
@@ -170,15 +174,15 @@ function App() {
                 <div className="absolute inset-[12px] border border-[#1b4d7a]/10 rounded" />
 
                 {/* Logo section - top left */}
-                <div className="absolute top-[28px] left-[28px] flex items-center gap-3">
-                  <div className="w-[42px] h-[42px] rounded-lg bg-gradient-to-br from-[#1b4d7a] to-[#c41e3a] flex items-center justify-center shadow-sm">
-                    <img src={uploadedImg || logoImg} alt="Logo" className="w-[30px] h-[30px] object-contain" style={{ WebkitPrintColorAdjust: 'exact', printColorAdjust: 'exact' }} />
+                  <div className="absolute top-[28px] left-[28px] flex items-center gap-3">
+                    <div className="w-[42px] h-[42px] rounded-lg bg-gradient-to-br from-[#1b4d7a] to-[#c41e3a] flex items-center justify-center shadow-sm">
+                      <img src={uploadedImg || logoImg} alt="Logo" className="w-[30px] h-[30px] object-contain" style={{ WebkitPrintColorAdjust: 'exact', printColorAdjust: 'exact' }} />
+                    </div>
+                    <div>
+                      <div className="text-[13px] font-bold leading-tight" style={{ color: '#1b4d7a' }}>{data.backHeading}</div>
+                      <div className="text-[9px] font-semibold leading-tight" style={{ color: '#c41e3a' }}>{data.backSubheading}</div>
+                    </div>
                   </div>
-                  <div>
-                    <div className="text-[13px] font-bold leading-tight" style={{ color: '#1b4d7a' }}>Imperial</div>
-                    <div className="text-[9px] font-semibold leading-tight" style={{ color: '#c41e3a' }}>Innovation Fund</div>
-                  </div>
-                </div>
 
                 {/* Divider line */}
                 <div className="absolute top-[88px] left-[28px] right-[28px] h-[1px]" style={{ background: 'linear-gradient(90deg, #1b4d7a20, #c41e3a40, #1b4d7a20)' }} />
@@ -197,9 +201,17 @@ function App() {
                     <span className="text-[#c41e3a] text-[11px] w-[18px] text-center">&#9998;</span>
                     <span className="text-[11px] font-medium" style={{ color: '#1b4d7a' }}>{data.website}</span>
                   </div>
+                  <div className="flex items-center gap-3">
+                    <span className="text-[#1b4d7a] text-[11px] w-[18px] text-center">&#9881;</span>
+                    <span className="text-[11px]" style={{ color: '#444' }}>{data.backAddress}</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="text-[#c41e3a] text-[11px] w-[18px] text-center">&#64;</span>
+                    <span className="text-[11px] font-medium" style={{ color: '#1b4d7a' }}>{data.backSocial}</span>
+                  </div>
                   <div className="flex items-start gap-3 mt-[4px]">
                     <span className="text-[#1b4d7a] text-[10px] w-[18px] text-center leading-[16px]">&#9733;</span>
-                    <span className="text-[10px] italic" style={{ color: '#888' }}>"{data.tagline}"</span>
+                    <span className="text-[10px] italic" style={{ color: '#888' }}>"{data.backSubheading}"</span>
                   </div>
                 </div>
 
@@ -216,8 +228,8 @@ function App() {
                 {/* Bottom bar - name & title */}
                 <div className="absolute bottom-[24px] left-[28px] right-[28px] flex items-center justify-between">
                   <div>
-                    <div className="text-[11px] font-bold" style={{ color: '#1b4d7a' }}>{data.name}</div>
-                    <div className="text-[9px]" style={{ color: '#c41e3a' }}>{data.title}</div>
+                    <div className="text-[11px] font-bold" style={{ color: '#1b4d7a' }}>{data.backHeading}</div>
+                    <div className="text-[9px]" style={{ color: '#c41e3a' }}>{data.backSubheading}</div>
                   </div>
                   <div className="text-[8px] tracking-[0.15em] uppercase" style={{ color: '#aaa' }}>Back</div>
                 </div>
@@ -354,6 +366,56 @@ function App() {
                 onChange={(e) => handleChange('tagline', e.target.value)}
                 className="w-full px-5 py-3.5 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-white/20 text-sm focus:outline-none focus:border-pink-500/60 focus:bg-white/[0.08] focus:ring-4 focus:ring-pink-500/10 group-focus-within:shadow-lg group-focus-within:shadow-pink-500/5 transition-all duration-300"
               />
+            </div>
+
+            {/* Back Content Section */}
+            <div className="pt-4 mt-2 border-t border-white/10">
+              <div className="flex items-center gap-2 mb-5">
+                <div className="w-1 h-5 bg-gradient-to-b from-pink-500 to-rose-500 rounded-full" />
+                <h3 className="text-white/50 text-[10px] font-semibold uppercase tracking-[0.2em]">Back Content</h3>
+              </div>
+
+              <div className="space-y-5">
+                <div className="group">
+                  <label className="block text-white/60 text-[11px] font-semibold uppercase tracking-[0.15em] mb-2 group-focus-within:text-pink-400 transition-colors duration-200">Back Heading</label>
+                  <input
+                    type="text"
+                    value={data.backHeading}
+                    onChange={(e) => handleChange('backHeading', e.target.value)}
+                    className="w-full px-5 py-3.5 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-white/20 text-sm focus:outline-none focus:border-pink-500/60 focus:bg-white/[0.08] focus:ring-4 focus:ring-pink-500/10 group-focus-within:shadow-lg group-focus-within:shadow-pink-500/5 transition-all duration-300"
+                  />
+                </div>
+
+                <div className="group">
+                  <label className="block text-white/60 text-[11px] font-semibold uppercase tracking-[0.15em] mb-2 group-focus-within:text-pink-400 transition-colors duration-200">Back Subheading</label>
+                  <input
+                    type="text"
+                    value={data.backSubheading}
+                    onChange={(e) => handleChange('backSubheading', e.target.value)}
+                    className="w-full px-5 py-3.5 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-white/20 text-sm focus:outline-none focus:border-pink-500/60 focus:bg-white/[0.08] focus:ring-4 focus:ring-pink-500/10 group-focus-within:shadow-lg group-focus-within:shadow-pink-500/5 transition-all duration-300"
+                  />
+                </div>
+
+                <div className="group">
+                  <label className="block text-white/60 text-[11px] font-semibold uppercase tracking-[0.15em] mb-2 group-focus-within:text-pink-400 transition-colors duration-200">Address</label>
+                  <input
+                    type="text"
+                    value={data.backAddress}
+                    onChange={(e) => handleChange('backAddress', e.target.value)}
+                    className="w-full px-5 py-3.5 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-white/20 text-sm focus:outline-none focus:border-pink-500/60 focus:bg-white/[0.08] focus:ring-4 focus:ring-pink-500/10 group-focus-within:shadow-lg group-focus-within:shadow-pink-500/5 transition-all duration-300"
+                  />
+                </div>
+
+                <div className="group">
+                  <label className="block text-white/60 text-[11px] font-semibold uppercase tracking-[0.15em] mb-2 group-focus-within:text-pink-400 transition-colors duration-200">Social Handle</label>
+                  <input
+                    type="text"
+                    value={data.backSocial}
+                    onChange={(e) => handleChange('backSocial', e.target.value)}
+                    className="w-full px-5 py-3.5 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-white/20 text-sm focus:outline-none focus:border-pink-500/60 focus:bg-white/[0.08] focus:ring-4 focus:ring-pink-500/10 group-focus-within:shadow-lg group-focus-within:shadow-pink-500/5 transition-all duration-300"
+                  />
+                </div>
+              </div>
             </div>
 
             <div className="group">
