@@ -80,14 +80,14 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 no-print flex items-center justify-center">
-      <div className="w-full max-w-2xl px-4 py-8">
-        <h1 className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-rose-400 text-3xl font-bold text-center mb-8 tracking-tight">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 no-print">
+      <div className="w-full max-w-2xl mx-auto px-4 py-12">
+        <h1 className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-rose-400 text-4xl font-bold text-center mb-12 tracking-tight">
           Business Card Editor
         </h1>
 
         {/* Card Preview */}
-        <div className="flex justify-center mb-10">
+        <div className="flex justify-center mb-16">
           <div className="p-4 bg-white/5 backdrop-blur-xl rounded-2xl shadow-2xl print-card ring-1 ring-white/10">
             <div 
               className="w-[570px] h-[310px] overflow-visible relative shadow-xl rounded-lg"
@@ -176,7 +176,7 @@ function App() {
             <h2 className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/70 text-xl font-bold tracking-tight">Edit Your Card</h2>
           </div>
 
-          <div className="max-w-md mx-auto space-y-5">
+          <div className="max-w-lg mx-auto space-y-6">
             <div className="group">
               <label className="block text-white/60 text-[11px] font-semibold uppercase tracking-[0.15em] mb-2 group-focus-within:text-pink-400 transition-colors duration-200">Full Name</label>
               <input
