@@ -173,17 +173,21 @@ function App() {
 
                 {/* Center content */}
                 <div className="relative z-10 flex flex-col items-center px-16">
-                  <div className="w-20 h-20 rounded-2xl bg-white/10 backdrop-blur flex items-center justify-center mb-5 ring-1 ring-white/20">
-                    <img src={uploadedImg || logoImg} alt="Logo" className="w-14 h-14 object-contain" style={{ WebkitPrintColorAdjust: 'exact', printColorAdjust: 'exact' }} />
+                  {/* Logo with powerful glow */}
+                  <div className="relative mb-6">
+                    <div className="absolute inset-0 w-28 h-28 rounded-2xl bg-gradient-to-br from-pink-500/30 to-rose-500/10 blur-2xl" />
+                    <div className="relative w-28 h-28 rounded-2xl bg-white/10 backdrop-blur-xl flex items-center justify-center ring-2 ring-white/20 shadow-2xl shadow-pink-500/20">
+                      <img src={uploadedImg || logoImg} alt="Logo" className="w-20 h-20 object-contain drop-shadow-lg" style={{ WebkitPrintColorAdjust: 'exact', printColorAdjust: 'exact' }} />
+                    </div>
                   </div>
 
-                  <h2 className="text-white text-center text-[20px] font-bold tracking-[0.3px] leading-tight" style={{ WebkitPrintColorAdjust: 'exact', printColorAdjust: 'exact' }}>
+                  <h2 className="text-white text-center text-[22px] font-bold tracking-[0.5px] leading-tight drop-shadow-lg" style={{ WebkitPrintColorAdjust: 'exact', printColorAdjust: 'exact' }}>
                     {data.backHeading || 'Imperial Innovation Fund Limited'}
                   </h2>
 
-                  <div className="w-16 h-[2px] bg-gradient-to-r from-transparent via-pink-400 to-transparent my-4" />
+                  <div className="w-20 h-[3px] bg-gradient-to-r from-transparent via-pink-400 to-transparent my-5 rounded-full" />
 
-                  <p className="text-white/60 text-center text-[11px] font-medium tracking-[0.15em] uppercase" style={{ WebkitPrintColorAdjust: 'exact', printColorAdjust: 'exact' }}>
+                  <p className="text-white/70 text-center text-[12px] font-medium tracking-[0.18em] uppercase drop-sm" style={{ WebkitPrintColorAdjust: 'exact', printColorAdjust: 'exact' }}>
                     {data.tagline}
                   </p>
                 </div>
