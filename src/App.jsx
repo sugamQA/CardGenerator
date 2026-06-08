@@ -254,7 +254,7 @@ function App() {
             <h2 className="text-white text-xl font-semibold tracking-tight">Edit Your Card</h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5">
+          <div className="max-w-lg mx-auto space-y-5">
             <div>
               <label className="block text-white/70 text-xs font-medium uppercase tracking-wider mb-2">Full Name</label>
               <input
@@ -315,7 +315,7 @@ function App() {
               />
             </div>
 
-            <div className="md:col-span-2">
+            <div>
               <label className="block text-white/70 text-xs font-medium uppercase tracking-wider mb-2">QR Code URL</label>
               <input
                 type="text"
@@ -325,7 +325,7 @@ function App() {
               />
             </div>
 
-            <div className="md:col-span-2">
+            <div>
               <label className="block text-white/70 text-xs font-medium uppercase tracking-wider mb-2">Upload Image (PNG / JPEG)</label>
               <div className="relative">
                 <input
@@ -337,29 +337,29 @@ function App() {
               </div>
 
               {uploadedImg && (
-                <div className="mt-4 p-4 rounded-xl bg-white/5 border border-white/10 space-y-3">
-                  <div className="flex items-center gap-3">
+                <div className="mt-4 p-5 rounded-xl bg-white/5 border border-white/10 space-y-4">
+                  <div className="flex items-center justify-center gap-3">
                     <label className="text-white/60 text-xs w-8">Size</label>
-                    <input type="range" min="40" max="220" value={uploadSize} onChange={(e)=>setUploadSize(Number(e.target.value))} className="flex-1 accent-pink-500" />
+                    <input type="range" min="40" max="220" value={uploadSize} onChange={(e)=>setUploadSize(Number(e.target.value))} className="flex-1 max-w-[200px] accent-pink-500" />
                     <span className="text-white/80 text-xs w-10 text-right font-mono">{uploadSize}px</span>
                   </div>
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center justify-center gap-3">
                     <label className="text-white/60 text-xs w-8">X</label>
-                    <input type="range" min="-80" max="80" value={uploadOffsetX} onChange={(e)=>setUploadOffsetX(Number(e.target.value))} className="flex-1 accent-pink-500" />
+                    <input type="range" min="-80" max="80" value={uploadOffsetX} onChange={(e)=>setUploadOffsetX(Number(e.target.value))} className="flex-1 max-w-[200px] accent-pink-500" />
                     <span className="text-white/80 text-xs w-10 text-right font-mono">{uploadOffsetX}</span>
                   </div>
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center justify-center gap-3">
                     <label className="text-white/60 text-xs w-8">Y</label>
-                    <input type="range" min="-80" max="80" value={uploadOffsetY} onChange={(e)=>setUploadOffsetY(Number(e.target.value))} className="flex-1 accent-pink-500" />
+                    <input type="range" min="-80" max="80" value={uploadOffsetY} onChange={(e)=>setUploadOffsetY(Number(e.target.value))} className="flex-1 max-w-[200px] accent-pink-500" />
                     <span className="text-white/80 text-xs w-10 text-right font-mono">{uploadOffsetY}</span>
                   </div>
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center justify-center gap-3">
                     <label className="text-white/60 text-xs w-8">Fit</label>
-                    <select value={uploadFit} onChange={(e)=>setUploadFit(e.target.value)} className="flex-1 px-3 py-2 rounded-lg bg-white/10 border border-white/10 text-white text-xs focus:outline-none focus:border-pink-500/50">
+                    <select value={uploadFit} onChange={(e)=>setUploadFit(e.target.value)} className="px-4 py-2 rounded-lg bg-white/10 border border-white/10 text-white text-xs focus:outline-none focus:border-pink-500/50">
                       <option value="contain">Contain</option>
                       <option value="cover">Cover</option>
                     </select>
-                    <button onClick={removeUpload} className="px-4 py-2 bg-red-500/20 text-red-300 text-xs font-medium rounded-lg hover:bg-red-500/30 transition-all duration-200">
+                    <button onClick={removeUpload} className="px-5 py-2 bg-red-500/20 text-red-300 text-xs font-medium rounded-lg hover:bg-red-500/30 transition-all duration-200">
                       Remove
                     </button>
                   </div>
@@ -368,14 +368,14 @@ function App() {
             </div>
           </div>
 
-          <div className="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center gap-4">
-            <div className="flex items-center gap-3">
+          <div className="mt-8 pt-6 border-t border-white/10 flex flex-col items-center gap-4">
+            <div className="flex items-center gap-4">
               <label className="text-white/60 text-xs font-medium">Width</label>
               <div className="flex items-center gap-1.5">
                 <input type="number" value={exportWidth} onChange={(e)=>setExportWidth(Number(e.target.value))} className="w-20 px-3 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-sm text-center focus:outline-none focus:border-pink-500/50" />
                 <span className="text-white/40 text-xs">mm</span>
               </div>
-              <label className="text-white/60 text-xs font-medium ml-2">Height</label>
+              <label className="text-white/60 text-xs font-medium">Height</label>
               <div className="flex items-center gap-1.5">
                 <input type="number" value={exportHeight} onChange={(e)=>setExportHeight(Number(e.target.value))} className="w-20 px-3 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-sm text-center focus:outline-none focus:border-pink-500/50" />
                 <span className="text-white/40 text-xs">mm</span>
@@ -383,7 +383,7 @@ function App() {
             </div>
             <button
               onClick={exportPdf}
-              className="sm:ml-auto w-full sm:w-auto px-8 py-3 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-pink-500/25 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
+              className="w-full max-w-xs px-8 py-3 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-pink-500/25 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
             >
               Print / Save PDF
             </button>
