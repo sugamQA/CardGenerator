@@ -150,46 +150,77 @@ function App() {
               </div>
             ) : (
               <div
-                className="w-[570px] h-[310px] overflow-hidden relative shadow-xl rounded-lg flex flex-col items-center justify-center"
-                style={{ background: 'linear-gradient(135deg, #1b4d7a 0%, #162d4a 50%, #8b2b3a 100%)', WebkitPrintColorAdjust: 'exact', printColorAdjust: 'exact' }}
+                className="w-[570px] h-[310px] overflow-hidden relative shadow-xl rounded-lg"
+                style={{ background: 'white', WebkitPrintColorAdjust: 'exact', printColorAdjust: 'exact' }}
               >
-                {/* Decorative diamond pattern */}
-                <svg className="absolute inset-0 w-full h-full opacity-[0.06]" viewBox="0 0 570 310" xmlns="http://www.w3.org/2000/svg">
+                {/* Subtle dot pattern overlay */}
+                <svg className="absolute inset-0 w-full h-full opacity-[0.03]" viewBox="0 0 570 310" xmlns="http://www.w3.org/2000/svg">
                   <defs>
-                    <pattern id="diamond" width="60" height="60" patternUnits="userSpaceOnUse">
-                      <rect width="60" height="60" fill="none" />
-                      <path d="M30 0 L60 30 L30 60 L0 30 Z" fill="white" stroke="none" />
+                    <pattern id="dots" width="16" height="16" patternUnits="userSpaceOnUse">
+                      <circle cx="2" cy="2" r="1" fill="#1b4d7a" />
                     </pattern>
                   </defs>
-                  <rect width="570" height="310" fill="url(#diamond)" />
+                  <rect width="570" height="310" fill="url(#dots)" />
                 </svg>
 
-                {/* Top red accent line */}
-                <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: 'linear-gradient(90deg, #c41e3a, #e8506a, #c41e3a)' }} />
+                {/* Top gradient stripe */}
+                <div className="absolute top-0 left-0 right-0 h-[5px]" style={{ background: 'linear-gradient(90deg, #1b4d7a, #2e5a8c, #c41e3a)' }} />
 
-                {/* Center content */}
-                <div className="relative z-10 flex flex-col items-center px-16">
-                  <div className="w-20 h-20 rounded-2xl bg-white/10 backdrop-blur flex items-center justify-center mb-5 ring-1 ring-white/20">
-                    <img src={uploadedImg || logoImg} alt="Logo" className="w-14 h-14 object-contain" style={{ WebkitPrintColorAdjust: 'exact', printColorAdjust: 'exact' }} />
+                {/* Thin border frame */}
+                <div className="absolute inset-[12px] border border-[#1b4d7a]/10 rounded" />
+
+                {/* Logo section - top left */}
+                <div className="absolute top-[28px] left-[28px] flex items-center gap-3">
+                  <div className="w-[42px] h-[42px] rounded-lg bg-gradient-to-br from-[#1b4d7a] to-[#c41e3a] flex items-center justify-center shadow-sm">
+                    <img src={uploadedImg || logoImg} alt="Logo" className="w-[30px] h-[30px] object-contain" style={{ WebkitPrintColorAdjust: 'exact', printColorAdjust: 'exact' }} />
                   </div>
-
-                  <h2 className="text-white text-center text-[20px] font-bold tracking-[0.3px] leading-tight" style={{ WebkitPrintColorAdjust: 'exact', printColorAdjust: 'exact' }}>
-                    Imperial Innovation Fund Limited
-                  </h2>
-
-                  <div className="w-16 h-[2px] bg-gradient-to-r from-transparent via-pink-400 to-transparent my-4" />
-
-                  <p className="text-white/60 text-center text-[11px] font-medium tracking-[0.15em] uppercase" style={{ WebkitPrintColorAdjust: 'exact', printColorAdjust: 'exact' }}>
-                    {data.tagline}
-                  </p>
+                  <div>
+                    <div className="text-[13px] font-bold leading-tight" style={{ color: '#1b4d7a' }}>Imperial</div>
+                    <div className="text-[9px] font-semibold leading-tight" style={{ color: '#c41e3a' }}>Innovation Fund</div>
+                  </div>
                 </div>
 
-                {/* Bottom bar */}
-                <div className="absolute bottom-0 left-0 right-0 h-[2px]" style={{ background: 'linear-gradient(90deg, transparent, #c41e3a, transparent)' }} />
+                {/* Divider line */}
+                <div className="absolute top-[88px] left-[28px] right-[28px] h-[1px]" style={{ background: 'linear-gradient(90deg, #1b4d7a20, #c41e3a40, #1b4d7a20)' }} />
 
-                {/* Corner accents */}
-                <div className="absolute top-3 right-3 w-8 h-8 border-t-2 border-r-2 border-white/10 rounded-tr" />
-                <div className="absolute bottom-3 left-3 w-8 h-8 border-b-2 border-l-2 border-white/10 rounded-bl" />
+                {/* Left column - Contact Details */}
+                <div className="absolute top-[108px] left-[28px] flex flex-col gap-[10px]">
+                  <div className="flex items-center gap-3">
+                    <span className="text-[#1b4d7a] text-[11px] w-[18px] text-center">&#9993;</span>
+                    <span className="text-[11px]" style={{ color: '#444' }}>{data.email}</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="text-[#1b4d7a] text-[11px] w-[18px] text-center">&#9742;</span>
+                    <span className="text-[11px]" style={{ color: '#444' }}>{data.phone}</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="text-[#c41e3a] text-[11px] w-[18px] text-center">&#9998;</span>
+                    <span className="text-[11px] font-medium" style={{ color: '#1b4d7a' }}>{data.website}</span>
+                  </div>
+                  <div className="flex items-start gap-3 mt-[4px]">
+                    <span className="text-[#1b4d7a] text-[10px] w-[18px] text-center leading-[16px]">&#9733;</span>
+                    <span className="text-[10px] italic" style={{ color: '#888' }}>"{data.tagline}"</span>
+                  </div>
+                </div>
+
+                {/* Right column - QR Code */}
+                <div className="absolute top-[108px] right-[28px] flex flex-col items-center">
+                  <div style={{width: '76px', height: '76px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                    <div style={{background: 'white', padding: '5px', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 8px rgba(0,0,0,0.08)'}}>
+                      <QRCodeSVG value={data.qrUrl} size={64} fgColor="#1b4d7a" bgColor="white" level="M" />
+                    </div>
+                  </div>
+                  <div className="mt-[4px] text-[8px] font-semibold tracking-[0.1em] uppercase" style={{ color: '#c41e3a' }}>Scan</div>
+                </div>
+
+                {/* Bottom bar - name & title */}
+                <div className="absolute bottom-[24px] left-[28px] right-[28px] flex items-center justify-between">
+                  <div>
+                    <div className="text-[11px] font-bold" style={{ color: '#1b4d7a' }}>{data.name}</div>
+                    <div className="text-[9px]" style={{ color: '#c41e3a' }}>{data.title}</div>
+                  </div>
+                  <div className="text-[8px] tracking-[0.15em] uppercase" style={{ color: '#aaa' }}>Back</div>
+                </div>
               </div>
             )}
           </div>
