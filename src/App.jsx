@@ -1,7 +1,6 @@
 import { useState } from 'react';
+import { QRCodeSVG } from 'qrcode.react';
 import './index.css';
-import templates from './templates';
-import CardRenderer from './components/CardRenderer';
 import logoImg from './assets/logo.png';
 
 const initialData = {
@@ -26,7 +25,6 @@ function App() {
   const [uploadOffsetY, setUploadOffsetY] = useState(0);
   const [uploadFit, setUploadFit] = useState('contain');
   const [showBack, setShowBack] = useState(false);
-  const [selectedTemplate, setSelectedTemplate] = useState(templates[0]);
 
   const [exportWidth, setExportWidth] = useState(85); // mm
   const [exportHeight, setExportHeight] = useState(55); // mm
@@ -93,36 +91,115 @@ function App() {
           Business Card
         </h1>
 
-        {/* Template Selector */}
-        <div className="flex flex-wrap gap-3 mb-8 justify-center">
-          {templates.map(t => (
-            <button
-              key={t.id}
-              onClick={() => { setSelectedTemplate(t); setShowBack(false); }}
-              className={`px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
-                selectedTemplate.id === t.id
-                  ? 'bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-lg shadow-pink-500/25'
-                  : 'bg-white/10 border border-white/10 text-white/70 hover:bg-white/20 hover:text-white'
-              }`}
-            >
-              {t.name}
-            </button>
-          ))}
-        </div>
-
         {/* Card Preview */}
         <div className="flex flex-col items-center gap-4 mb-16">
           <div className="p-4 bg-white/5 backdrop-blur-xl rounded-2xl shadow-2xl print-card ring-1 ring-white/10">
-            <CardRenderer
-              template={selectedTemplate}
-              data={data}
-              uploadedImg={uploadedImg}
-              uploadSize={uploadSize}
-              uploadOffsetX={uploadOffsetX}
-              uploadOffsetY={uploadOffsetY}
-              uploadFit={uploadFit}
-              showBack={showBack}
-            />
+            {!showBack ? (
+              <div
+                className="w-[570px] h-[310px] overflow-visible relative shadow-xl rounded-lg"
+                style={{ background: 'white', WebkitPrintColorAdjust: 'exact', printColorAdjust: 'exact' }}
+              >
+                <div
+                  className="absolute left-0 top-0 w-[260px] h-full flex items-center justify-center rounded-l-lg"
+                  style={{ background: 'linear-gradient(135deg, #1b4d7a 0%, #2e5a8c 45%, #c41e3a 100%)', WebkitPrintColorAdjust: 'exact', printColorAdjust: 'exact', overflow: 'hidden' }}
+                >
+                  <svg className="absolute inset-0 w-full h-full" viewBox="0 0 260 310" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style={{stopColor: '#2e5a8c', stopOpacity: 1}} />
+                        <stop offset="45%" style={{stopColor: '#1b4d7a', stopOpacity: 1}} />
+                        <stop offset="75%" style={{stopColor: '#8b2b3a', stopOpacity: 1}} />
+                        <stop offset="100%" style={{stopColor: '#c41e3a', stopOpacity: 1}} />
+                      </linearGradient>
+                    </defs>
+                    <path d="M 160 0 Q 220 80 200 155 Q 180 230 160 310" fill="none" stroke="url(#waveGradient)" strokeWidth="60" strokeLinecap="round" />
+                    <path d="M 190 0 Q 240 100 220 155 Q 200 210 190 310" fill="none" stroke="rgba(196,30,58,0.45)" strokeWidth="35" strokeLinecap="round" opacity="0.6" />
+                    <path d="M 210 0 Q 260 100 240 155 Q 220 210 210 310" fill="none" stroke="rgba(255, 255, 255, 0.2)" strokeWidth="12" strokeLinecap="round" />
+                  </svg>
+
+                  <div className="absolute left-[35px] top-[50%] -translate-y-1/2 z-20 flex flex-col items-center">
+                    <div style={{width: '128px', height: '128px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                      <div style={{background: '#c41e3a', width: '116px', height: '116px', borderRadius: '9999px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 10px 20px rgba(0,0,0,0.35)'}}>
+                        <div style={{background: 'white', padding: '10px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                          <QRCodeSVG value={data.qrUrl} size={92} fgColor="#1b4d7a" bgColor="white" level="M" />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="mt-2 text-white/90 text-[11px] font-semibold" style={{letterSpacing: '0.4px'}}>Scan Me</div>
+                  </div>
+                  <div className="absolute left-0 bottom-0 w-[80px] h-[18px]" style={{ background: '#c41e3a', WebkitPrintColorAdjust: 'exact', printColorAdjust: 'exact' }} />
+                </div>
+
+                <div className="absolute right-0 top-0 w-[310px] h-full flex flex-col items-center justify-start p-[20px]" style={{ background: 'white', WebkitPrintColorAdjust: 'exact', printColorAdjust: 'exact' }}>
+                  <h1 className="text-center text-[18px] leading-[1.05] mb-[8px] w-full" style={{ WebkitPrintColorAdjust: 'exact', printColorAdjust: 'exact', letterSpacing: '0.2px', marginTop: '18px', fontWeight: 900, whiteSpace: 'nowrap', overflow: 'hidden' }}>
+                    <span style={{ color: '#1b4d7a', fontWeight: 900 }}>Imperial</span>
+                    <span style={{ color: '#c41e3a', marginLeft: '10px', fontWeight: 800 }}>Innovation Fund Limited</span>
+                  </h1>
+                  <img src={uploadedImg || logoImg} alt="Logo" className="mb-[12px] mt-[5px]" style={{ width: `${uploadSize}px`, height: `${uploadSize}px`, objectFit: uploadFit, transform: `translate(${uploadOffsetX}px, ${uploadOffsetY}px)`, transition: 'transform 120ms linear, width 120ms linear, height 120ms linear', WebkitPrintColorAdjust: 'exact', printColorAdjust: 'exact' }} />
+                  <div className="flex items-stretch gap-0 w-full mb-[12px]">
+                    <div className="flex-1 py-[6px] px-[12px] text-center text-white text-[9px] font-semibold flex items-center justify-center" style={{ background: '#c41e3a', WebkitPrintColorAdjust: 'exact', printColorAdjust: 'exact' }}>{data.website}</div>
+                    <div className="w-[25px] h-auto min-h-[24px]" style={{ background: '#1b4d7a', WebkitPrintColorAdjust: 'exact', printColorAdjust: 'exact' }} />
+                  </div>
+                  <div className="flex-1 flex items-center justify-center">
+                    <div className="w-full text-center pb-[14px]">
+                      <div className="text-[16px] font-bold" style={{ color: '#1a1a1a' }}>{data.name}</div>
+                      <div className="text-[12px] font-semibold mt-[6px]" style={{ color: '#c41e3a' }}>{data.title}</div>
+                      <div className="mt-[12px] text-[11px]" style={{ color: '#666666' }}>
+                        <div>{data.email}</div>
+                        <div className="mt-[4px]">{data.phone}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div
+                className="w-[570px] h-[310px] overflow-hidden relative shadow-xl rounded-lg flex flex-col items-center justify-center"
+                style={{ background: 'linear-gradient(135deg, #1b4d7a 0%, #162d4a 50%, #8b2b3a 100%)', WebkitPrintColorAdjust: 'exact', printColorAdjust: 'exact' }}
+              >
+                {/* Decorative diamond pattern */}
+                <svg className="absolute inset-0 w-full h-full opacity-[0.06]" viewBox="0 0 570 310" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <pattern id="diamond" width="60" height="60" patternUnits="userSpaceOnUse">
+                      <rect width="60" height="60" fill="none" />
+                      <path d="M30 0 L60 30 L30 60 L0 30 Z" fill="white" stroke="none" />
+                    </pattern>
+                  </defs>
+                  <rect width="570" height="310" fill="url(#diamond)" />
+                </svg>
+
+                {/* Top red accent line */}
+                <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: 'linear-gradient(90deg, #c41e3a, #e8506a, #c41e3a)' }} />
+
+                {/* Center content */}
+                <div className="relative z-10 flex flex-col items-center px-16">
+                  {/* Logo with powerful glow */}
+                  <div className="relative mb-6">
+                    <div className="absolute inset-0 w-28 h-28 rounded-2xl bg-gradient-to-br from-pink-500/30 to-rose-500/10 blur-2xl" />
+                    <div className="relative w-28 h-28 rounded-2xl bg-white/10 backdrop-blur-xl flex items-center justify-center ring-2 ring-white/20 shadow-2xl shadow-pink-500/20">
+                      <img src={uploadedImg || logoImg} alt="Logo" className="w-24 h-24 object-contain drop-shadow-lg" style={{ WebkitPrintColorAdjust: 'exact', printColorAdjust: 'exact' }} />
+                    </div>
+                  </div>
+
+                  <h2 className="text-white text-center text-[22px] font-bold tracking-[0.5px] leading-tight drop-shadow-lg" style={{ WebkitPrintColorAdjust: 'exact', printColorAdjust: 'exact' }}>
+                    {data.backHeading || 'Imperial Innovation Fund Limited'}
+                  </h2>
+
+                  <div className="w-20 h-[3px] bg-gradient-to-r from-transparent via-pink-400 to-transparent my-5 rounded-full" />
+
+                  <p className="text-white/70 text-center text-[12px] font-medium tracking-[0.18em] uppercase drop-sm" style={{ WebkitPrintColorAdjust: 'exact', printColorAdjust: 'exact' }}>
+                    {data.tagline}
+                  </p>
+                </div>
+
+                {/* Bottom bar */}
+                <div className="absolute bottom-0 left-0 right-0 h-[2px]" style={{ background: 'linear-gradient(90deg, transparent, #c41e3a, transparent)' }} />
+
+                {/* Corner accents */}
+                <div className="absolute top-3 right-3 w-8 h-8 border-t-2 border-r-2 border-white/10 rounded-tr" />
+                <div className="absolute bottom-3 left-3 w-8 h-8 border-b-2 border-l-2 border-white/10 rounded-bl" />
+              </div>
+            )}
           </div>
 
           {/* Flip toggle */}
